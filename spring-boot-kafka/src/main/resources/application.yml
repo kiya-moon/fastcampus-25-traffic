@@ -1,0 +1,19 @@
+# kafka 설정 방법 1. application.yml에 등록하면 간편하게 설정 가능
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      batch-size: 16384
+      properties:
+        linger.ms: 1  # 0이라면 즉시 메시지 전송, 1이라면 배치 사이즈 만큼 메시지를 모아서 전송
+    consumer:
+      group-id: order-processing-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.fastcampus.springbootkafka.model"
