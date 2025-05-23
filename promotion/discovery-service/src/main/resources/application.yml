@@ -1,0 +1,13 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-service
+
+eureka:
+  client:
+    register-with-eureka: false # discovery-service 자체가 서버이기 때문에 클라이언트 설정을 굳이 등록하지 않아도 되기 때문에 false로 설정
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0 # 클라이언트가 레지스트리가 비어있는 경우에 설정한 시간 후에 재시도
